@@ -18,7 +18,7 @@ function RegisterStudent() {
   const Submit = e => {
     e.preventDefault();
     axios
-      .post("http://localhost:4000/students/add", studentData)
+      .post("/students/add", studentData)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
     window.location.reload();

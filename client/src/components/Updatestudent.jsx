@@ -5,7 +5,6 @@ import { useSearchParams,useNavigate } from "react-router-dom";
 function UpdateStudent() {
   const [queryParameters] = useSearchParams();
   let navigate=useNavigate();
-  const url = "http://localhost:4000";
   const [studentData, setStudentData] = useState({
     name: "",
     gender: "",
@@ -17,8 +16,8 @@ function UpdateStudent() {
   });
   const getStudent = async () => {
     const id = queryParameters.get("id");
-    const response = await fetch(`${url}/students/${id}`);
-    const data = await response.json();
+    const response = await axios.get(`/students/${id}`);
+    const data = await response.data;
     setStudentData(data);
     console.log(data);
   };
@@ -31,7 +30,7 @@ function UpdateStudent() {
     e.preventDefault();
     const id = queryParameters.get("id");
     axios
-      .post(`${url}/students/update/${id}`, studentData)
+      .post(`/students/update/${id}`, studentData)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
     navigate("/students");

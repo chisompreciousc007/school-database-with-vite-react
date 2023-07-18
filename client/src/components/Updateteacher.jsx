@@ -14,10 +14,9 @@ function UpdateTeacher() {
 
   const getTeacher = async () => {
     const id = queryParameters.get("id");
-    const response = await fetch(`http://localhost:4000/teachers/${id}`);
-    const data = await response.json();
+    const response = await axios.get(`/teachers/${id}`);
+    const data = await response.data;
     setTeacherData(data);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -28,7 +27,7 @@ function UpdateTeacher() {
     e.preventDefault();
     const id = queryParameters.get("id");
     axios
-      .post("http://localhost:4000/teachers/update/" + id, teacherData)
+      .post("/teachers/update/" + id, teacherData)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
     navigate("/teachers");

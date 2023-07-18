@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 // import { link } from "react-router-dom";
@@ -15,7 +15,7 @@ function RegisterTeacher() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:4000/teachers/add", teacherData)
+      .post("/teachers/add", teacherData)
       .then(res => console.log(res.data))
       .catch(err => console.log(err));
     window.location.reload();

@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 // import UpdateTeacher from "../components/editteacher";
 
-function Teachers(props) {
-  const url = "http://localhost:4000";
+function Teachers() {
   const [teacherList, setTeacherList] = useState([]);
   let navigate = useNavigate();
 
   const getTeacherList = async () => {
-    const response = await fetch(`${url}/teachers/`);
-    const data = await response.json();
+    const response = await axios.get(`/teachers/`);
+    const data = await response.data;
     setTeacherList([...teacherList, ...data]);
   };
 
@@ -41,7 +40,6 @@ function Teachers(props) {
                   {teacher._id}
                   <button
                     onClick={() => {
-                      console.log(props);
                       navigate("/teachers/update?id=" + teacher._id);
                     }}
                     style={{ fontSize: "0.7rem" }}
@@ -52,7 +50,7 @@ function Teachers(props) {
                   <button
                     onClick={() => {
                       axios
-                        .delete(`${url}/teachers/${teacher._id}`)
+                        .delete(`/teachers/${teacher._id}`)
                         .then((res) => console.log(res.data));
                       let filteredList = teacherList.filter(
                         (el) => el._id !== teacher._id

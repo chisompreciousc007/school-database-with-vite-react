@@ -3,13 +3,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Students() {
-  const url = "http://localhost:4000";
+  // const url = "http://localhost:4000";
   let navigate = useNavigate();
   const [studentList, setStudentList] = useState([]);
 
   const getStudentList = async () => {
-    const response = await fetch(url + "/students");
-    const data = await response.json();
+    const response = await axios.get("/students");
+    const data = await response.data;
     setStudentList([...studentList, ...data]);
   };
   useEffect(() => {
@@ -50,7 +50,7 @@ function Students() {
                   <button
                     onClick={() => {
                       axios
-                        .delete(`${url}/students/${student._id}`)
+                        .delete(`/students/${student._id}`)
                         .then((res) => console.log(res.data));
                       let filteredList = studentList.filter(
                         (el) => el._id !== student._id
